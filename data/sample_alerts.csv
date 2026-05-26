@@ -1,0 +1,6 @@
+id,title,description,status,priority,date
+1,Fallo de conexión,No hay conexión en el área administrativa,critical,high,2026-05-26
+2,Actualización completada,Sistema actualizado correctamente,normal,low,2026-05-26
+3,Reporte pendiente,Reporte mensual pendiente de revisión,warning,medium,2026-05-26
+4,Servidor caído,El servidor principal no responde,critical,high,2026-05-26
+10,Falla eléctrica,Corte total de energía,critical,high,2026-05-26
