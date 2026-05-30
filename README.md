@@ -23,6 +23,7 @@ Ideal para instituciones financieras, clínicas u ONGs locales que manejan grand
 3. **Procesamiento**: Filtrado por severidad (`critical`) y chequeo contra `processed_alerts.json` para evitar duplicados.
 4. **Notificación**: Envío mediante API a Telegram.
 5. **Registro (Logs)**: Trazabilidad local en archivo físico y consola.
+6. **Despliegue Cloud (Nuevo)**: Contenedor Docker configurado para ejecución aislada y persistencia mediante volúmenes.
 
 ## Estructura del Proyecto
 ```txt
@@ -85,9 +86,23 @@ Edita `.env` con tus datos.
 
 ## Ejecución
 
-Ejecuta el proyecto en local con:
+### Ejecución Local
 ```bash
 python -m src.main
+```
+
+### Ejecución con Docker (Cloud/VPS)
+```bash
+# Construir la imagen
+docker build -t pulseflow .
+
+# Ejecutar montando volúmenes para persistir datos y logs
+docker run -d --name pulseflow-bot \
+  -v $(pwd)/data:/app/data \
+  -v $(pwd)/logs:/app/logs \
+  -v $(pwd)/processed_alerts.json:/app/processed_alerts.json \
+  --env-file .env \
+  pulseflow
 ```
 
 ## Ejemplos
@@ -112,7 +127,6 @@ id,title,description,status,priority,date
 
 ## Mejoras Futuras
 - Integración con **Google Sheets API**.
-- Containerización con **Docker**.
 - CI/CD automatizado vía **GitHub Actions**.
 - Despliegue serverless usando **Google Cloud Run**.
 - Programación periódica (ejecución automática) usando **cron jobs**.
